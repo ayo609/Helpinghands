@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087A43">
+<title>My Account | Helpinghands</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green: #087A43;
+  --green-dark: #075E35;
+  --gold: #D9A441;
+  --light: #F3F7F4;
+  --white: #FFFFFF;
+  --dark: #26352C;
+  --muted: #718078;
+  --border: #E2EAE4;
+  --shadow: 0 12px 35px rgba(10, 65, 35, .09);
+  --danger: #C34D42;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+button, input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== SITE HEADER ===== */
+
+.site-header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header-inner {
+  width: min(1000px, 92%);
+  margin: auto;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: white;
+  font-size: 23px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  padding: 9px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: white;
+  transition: .2s;
+}
+
+.header-link:hover {
+  background: var(--light);
+}
+
+/* ===== MAIN ===== */
+
+main {
+  width: min(1000px, 92%);
+  margin: 35px auto;
+  padding-bottom: 30px;
+}
+
+.page-heading {
+  margin-bottom: 25px;
+}
+
+.page-heading h1 {
+  font-size: 27px;
+  margin-bottom: 7px;
+}
+
+.page-heading p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* PROFILE CARD */
+
+.profile-card {
+  background: linear-gradient(120deg, #087A43, #075B34);
+  color: white;
+  border-radius: 17px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 23px;
+  box-shadow: 0 12px 25px rgba(8,122,67,.13);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  right: -70px;
+  top: -120px;
+}
+
+.avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: white;
+  color: var(--green);
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  font-weight: 800;
+  border: 3px solid var(--gold);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-info {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.profile-info h2 {
+  font-size: 21px;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+
+.profile-info p {
+  font-size: 13px;
+  opacity: .9;
+  overflow-wrap: anywhere;
+}
+
+.status {
+  display: inline-block;
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.25);
+  padding: 6px 11px;
+  border-radius: 20px;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* CONTENT GRID */
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 23px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  font-size: 17px;
+  margin-bottom: 19px;
+  color: var(--green);
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.field input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  outline: none;
+  font-size: 14px;
+  color: var(--dark);
+  background: #FCFDFC;
+  transition: .2s;
+}
+
+.field input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(8,122,67,.09);
+}
+
+.field input:disabled {
+  background: #F4F6F4;
+  color: #78847D;
+  cursor: not-allowed;
+}
+
+.field small {
+  display: block;
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 9px;
+  padding: 12px 17px;
+  font-size: 13px;
+  transition: .2s;
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.primary-btn {
+  background: var(--green);
+  color: white;
+}
+
+.primary-btn:hover {
+  background: var(--green-dark);
+}
+
+.light-btn {
+  background: #EAF4ED;
+  color: var(--green);
+}
+
+.light-btn:hover {
+  background: #DCEEDF;
+}
+
+.danger-btn {
+  background: #FFF0F0;
+  color: var(--danger);
+}
+
+.danger-btn:hover {
+  background: #FDE2E2;
+}
+
+.full-btn {
+  width: 100%;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row span:first-child {
+  color: var(--muted);
+}
+
+.detail-row strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.action-list {
+  display: grid;
+  gap: 11px;
+}
+
+.action-list button {
+  width: 100%;
+  text-align: left;
+  padding: 14px;
+}
+
+.action-list button span {
+  float: right;
+}
+
+.bottom-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 15px 0 30px;
+}
+
+/* LOADING */
+
+#loadingScreen {
+  text-align: center;
+  padding: 80px 15px;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.spinner {
+  width: 35px;
+  height: 35px;
+  border: 4px solid #DDEBE1;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* MODAL */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(13,30,20,.55);
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  background: white;
+  width: min(430px, 100%);
+  border-radius: 16px;
+  padding: 26px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+  animation: appear .2s ease;
+}
+
+@keyframes appear {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-box h3 {
+  color: var(--green);
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.modal-box p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  overflow-wrap: anywhere;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.modal-actions button {
+  min-width: 90px;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap input {
+  padding-right: 65px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px;
+  background: transparent;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 750px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .profile-card {
+    padding: 20px;
+  }
+
+  .page-heading h1 {
+    font-size: 24px;
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .site-header-inner {
+    min-height: 64px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .header-link {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="home.html" class="logo">
+      <span class="logo-mark">H</span>
+      Helpinghands
+    </a>
+
+    <div class="header-actions">
+      <a href="home.html" class="header-link">← Dashboard</a>
+    </div>
+  </div>
+</header>
+
+<!-- LOADING -->
+<div id="loadingScreen">
+  <div class="spinner"></div>
+  Loading your account...
+</div>
+
+<!-- MAIN CONTENT -->
+<main id="accountContent" style="display:none">
+
+  <div class="page-heading">
+    <h1>My Account</h1>
+    <p>View and manage your personal account information.</p>
+  </div>
+
+  <section class="profile-card">
+    <div class="avatar" id="avatar">H</div>
+    <div class="profile-info">
+      <h2 id="profileName">Member</h2>
+      <p id="profileEmail">Loading email...</p>
+      <span class="status" id="profileStatus">Account status</span>
+    </div>
+  </section>
+
+  <div class="content-grid">
+
+    <section class="card">
+      <h3>Personal Information</h3>
+
+      <form id="profileForm">
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input id="fullName" type="text" maxlength="80" required>
+        </div>
+
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" type="text" disabled>
+          <small>Your username cannot be changed here.</small>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" maxlength="20" required>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" disabled>
+          <small>Contact support if you need to change your email.</small>
+        </div>
+
+        <button class="primary-btn full-btn" id="saveProfileBtn" type="submit">
+          Save Changes
+        </button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h3>Account Details</h3>
+
+      <div class="detail-row">
+        <span>Account ID</span>
+        <strong id="accountId">—</strong>
+      </div>
+
+      <div class="detail-row">
+        <span>Registration Date</span>
+        <strong id="createdAt">—</strong>
+      </div>
+
+      <div class="detail-row">
+        <span>Last Login</span>
+        <strong id="lastLogin">—</strong>
+      </div>
+
+      <div class="detail-row">
+        <span>Account Status</span>
+        <strong id="accountStatus">—</strong>
+      </div>
+
+      <div class="detail-row">
+        <span>Account Type</span>
+        <strong>Member</strong>
+      </div>
+    </section>
+
+  </div>
+
+  <section class="card">
+    <h3>Change Password</h3>
+
+    <form id="passwordForm">
+      <div class="field">
+        <label for="currentPassword">Current Password</label>
+        <div class="password-wrap">
+          <input type="password" id="currentPassword" required>
+          <button type="button" class="toggle-password" data-target="currentPassword">Show</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="newPassword">New Password</label>
+        <div class="password-wrap">
+          <input type="password" id="newPassword" minlength="6" required>
+          <button type="button" class="toggle-password" data-target="newPassword">Show</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="confirmPassword">Confirm New Password</label>
+        <div class="password-wrap">
+          <input type="password" id="confirmPassword" minlength="6" required>
+          <button type="button" class="toggle-password" data-target="confirmPassword">Show</button>
+        </div>
+      </div>
+
+      <button class="primary-btn" id="changePasswordBtn" type="submit">
+        Update Password
+      </button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h3>Account Settings</h3>
+
+    <div class="action-list">
+      <button class="light-btn" id="termsBtn" type="button">
+        Terms and Conditions <span>›</span>
+      </button>
+
+      <button class="light-btn" id="privacyBtn" type="button">
+        Privacy Policy <span>›</span>
+      </button>
+
+      <button class="light-btn" id="logoutBtn" type="button">
+        Logout <span>›</span>
+      </button>
+
+      <button class="danger-btn" id="deleteBtn" type="button">
+        Request Account Deletion <span>›</span>
+      </button>
+    </div>
+  </section>
+
+  <div class="bottom-note">
+    Helpinghands · Account Management
+  </div>
+
+</main>
+
+<!-- GENERAL MODAL -->
+<div class="modal" id="messageModal">
+  <div class="modal-box">
+    <h3 id="modalTitle">Notification</h3>
+    <p id="modalMessage"></p>
+    <div class="modal-actions">
+      <button class="primary-btn" id="modalOk">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div class="modal" id="confirmModal">
+  <div class="modal-box">
+    <h3 id="confirmTitle">Please Confirm</h3>
+    <p id="confirmMessage"></p>
+    <div class="modal-actions">
+      <button class="light-btn" id="confirmCancel">Cancel</button>
+      <button class="primary-btn" id="confirmYes">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT MODAL -->
+<div class="modal" id="contentModal">
+  <div class="modal-box">
+    <h3 id="contentTitle"></h3>
+    <p id="contentText"></p>
+    <div class="modal-actions">
+      <button class="primary-btn" id="contentClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc,
+  serverTimestamp,
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDgKw66LXAJkviJdQMRVN254O71LOocGTA",
+  authDomain: "helpinghands-91d11.firebaseapp.com",
+  projectId: "helpinghands-91d11",
+  storageBucket: "helpinghands-91d11.firebasestorage.app",
+  messagingSenderId: "402651670418",
+  appId: "1:402651670418:web:59900378df2527043c034b"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+let currentProfile = null;
+
+const $ = id => document.getElementById(id);
+
+/* ===== MODAL HELPERS ===== */
+
+function showMessage(title, message) {
+  $("modalTitle").textContent = title;
+  $("modalMessage").textContent = message;
+  $("messageModal").classList.add("show");
+}
+
+function closeMessage() {
+  $("messageModal").classList.remove("show");
+}
+
+$("modalOk").addEventListener("click", closeMessage);
+
+function showContent(title, message) {
+  $("contentTitle").textContent = title;
+  $("contentText").textContent = message;
+  $("contentModal").classList.add("show");
+}
+
+$("contentClose").addEventListener("click", () => {
+  $("contentModal").classList.remove("show");
+});
+
+function askConfirmation(title, message) {
+  return new Promise(resolve => {
+    $("confirmTitle").textContent = title;
+    $("confirmMessage").textContent = message;
+    $("confirmModal").classList.add("show");
+
+    const yes = () => finish(true);
+    const no = () => finish(false);
+
+    function finish(answer) {
+      $("confirmModal").classList.remove("show");
+      $("confirmYes").removeEventListener("click", yes);
+      $("confirmCancel").removeEventListener("click", no);
+      resolve(answer);
+    }
+
+    $("confirmYes").addEventListener("click", yes);
+    $("confirmCancel").addEventListener("click", no);
+  });
+}
+
+/* ===== HELPERS ===== */
+
+function formatDate(value) {
+  if (!value) return "Not available";
+  const date = value.toDate ? value.toDate() : new Date(value);
+  if (Number.isNaN(date.getTime())) return "Not available";
+
+  return date.toLocaleString("en-NG", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+function setLoading(button, loading, normalText) {
+  button.disabled = loading;
+  button.textContent = loading ? "Please wait..." : normalText;
+}
+
+function showAccount() {
+  $("loadingScreen").style.display = "none";
+  $("accountContent").style.display = "block";
+}
+
+function hideAccount() {
+  $("loadingScreen").style.display = "block";
+  $("accountContent").style.display = "none";
+}
+
+/* ===== LOAD ACCOUNT ===== */
+
+async function loadAccount(user) {
+  currentUser = user;
+
+  const profileRef = doc(db, "users", user.uid);
+  const profileSnap = await getDoc(profileRef);
+
+  if (!profileSnap.exists()) {
+    await signOut(auth);
+    showMessage("Account Not Found", "Your account profile could not be found. Please contact support.");
+    return;
+  }
+
+  currentProfile = profileSnap.data();
+
+  const fullName = currentProfile.fullName || "Member";
+  const username = currentProfile.username || "Not available";
+  const phone = currentProfile.phone || "";
+
+  $("profileName").textContent = fullName;
+  $("profileEmail").textContent = user.email || currentProfile.email || "No email";
+  $("avatar").textContent = fullName.trim().charAt(0).toUpperCase() || "H";
+
+  $("fullName").value = fullName;
+  $("username").value = username;
+  $("phone").value = phone;
+  $("email").value = user.email || currentProfile.email || "";
+
+  const status = currentProfile.status || "Active";
+  $("profileStatus").textContent = status;
+  $("accountStatus").textContent = status;
+
+  $("accountId").textContent = user.uid;
+  $("createdAt").textContent = formatDate(
+    currentProfile.createdAt || user.metadata.creationTime
+  );
+  $("lastLogin").textContent = formatDate(user.metadata.lastSignInTime);
+
+  showAccount();
+}
+
+/* ===== AUTH STATE ===== */
+
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    window.location.replace("login.html");
+    return;
+  }
+
+  hideAccount();
+
+  try {
+    await loadAccount(user);
+  } catch (error) {
+    console.error("Account loading error:", error);
+    showMessage(
+      "Loading Error",
+      "We could not load your account information. Check your connection and try again."
+    );
+    $("loadingScreen").innerHTML =
+      '<p>Unable to load your account. Please refresh the page.</p>';
+  }
+});
+
+/* ===== UPDATE PROFILE ===== */
+
+$("profileForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!currentUser) return;
+
+  const fullName = $("fullName").value.trim();
+  const phone = $("phone").value.trim();
+
+  if (fullName.length < 2) {
+    showMessage("Invalid Name", "Please enter your full name.");
+    return;
+  }
+
+  if (phone.length < 7) {
+    showMessage("Invalid Phone Number", "Please enter a valid phone number.");
+    return;
+  }
+
+  const button = $("saveProfileBtn");
+  setLoading(button, true, "Save Changes");
+
+  try {
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      fullName,
+      phone,
+      updatedAt: serverTimestamp()
+    });
+
+    currentProfile.fullName = fullName;
+    currentProfile.phone = phone;
+
+    $("profileName").textContent = fullName;
+    $("avatar").textContent = fullName.charAt(0).toUpperCase();
+
+    showMessage("Profile Updated", "Your personal information has been updated successfully.");
+  } catch (error) {
+    console.error(error);
+    showMessage("Update Failed", "We could not update your information. Please try again.");
+  } finally {
+    setLoading(button, false, "Save Changes");
+  }
+});
+
+/* ===== PASSWORD VISIBILITY ===== */
+
+document.querySelectorAll(".toggle-password").forEach(button => {
+  button.addEventListener("click", () => {
+    const input = $(button.dataset.target);
+    const showing = input.type === "text";
+
+    input.type = showing ? "password" : "text";
+    button.textContent = showing ? "Show" : "Hide";
+  });
+});
+
+/* ===== CHANGE PASSWORD ===== */
+
+$("passwordForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!currentUser || !currentUser.email) {
+    showMessage("Password Error", "Your account email could not be verified.");
+    return;
+  }
+
+  const currentPassword = $("currentPassword").value;
+  const newPassword = $("newPassword").value;
+  const confirmPassword = $("confirmPassword").value;
+
+  if (newPassword.length < 6) {
+    showMessage("Weak Password", "Your new password must contain at least 6 characters.");
+    return;
+  }
+
+  if (newPassword !== confirmPassword) {
+    showMessage("Password Mismatch", "Your new password and confirmation do not match.");
+    return;
+  }
+
+  if (currentPassword === newPassword) {
+    showMessage("Choose Another Password", "Your new password must be different from your current password.");
+    return;
+  }
+
+  const button = $("changePasswordBtn");
+  setLoading(button, true, "Update Password");
+
+  try {
+    const credential = EmailAuthProvider.credential(
+      currentUser.email,
+      currentPassword
+    );
+
+    await reauthenticateWithCredential(currentUser, credential);
+    await updatePassword(currentUser, newPassword);
+
+    $("passwordForm").reset();
+    document.querySelectorAll(".toggle-password").forEach(button => {
+      const input = $(button.dataset.target);
+      input.type = "password";
+      button.textContent = "Show";
+    });
+
+    showMessage("Password Changed", "Your password has been updated successfully.");
+  } catch (error) {
+    console.error(error);
+
+    if (
+      error.code === "auth/invalid-credential" ||
+      error.code === "auth/wrong-password"
+    ) {
+      showMessage("Incorrect Password", "Your current password is incorrect.");
+    } else if (error.code === "auth/weak-password") {
+      showMessage("Weak Password", "Please choose a stronger password.");
+    } else if (error.code === "auth/requires-recent-login") {
+      showMessage("Login Required", "Please log out and log in again before changing your password.");
+    } else {
+      showMessage("Password Update Failed", error.message || "Please try again.");
+    }
+  } finally {
+    setLoading(button, false, "Update Password");
+  }
+});
+
+/* ===== TERMS AND PRIVACY ===== */
+
+$("termsBtn").addEventListener("click", () => {
+  showContent(
+    "Terms and Conditions",
+    "Helpinghands account holders must provide accurate information and keep their login credentials secure. Members must use the platform lawfully and must not impersonate others, misuse personal information or attempt unauthorized access. Any contributions or payments, if offered by the platform, must be voluntary and clearly documented. No earnings or returns are guaranteed. Please contact the platform administrator for the complete current terms."
+  );
+});
+
+$("privacyBtn").addEventListener("click", () => {
+  showContent(
+    "Privacy Policy",
+    "Helpinghands stores account information such as your name, username, phone number and email address to operate your account. Access to personal information should be restricted and protected by appropriate Firebase security rules. Do not share your password with anyone. Contact the platform administrator if you have questions about your information or wish to request its deletion."
+  );
+});
+
+/* ===== LOGOUT ===== */
+
+$("logoutBtn").addEventListener("click", async () => {
+  const confirmed = await askConfirmation(
+    "Logout",
+    "Are you sure you want to log out of your Helpinghands account?"
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await signOut(auth);
+    window.location.replace("login.html");
+  } catch (error) {
+    console.error(error);
+    showMessage("Logout Failed", "Please try again.");
+  }
+});
+
+/* ===== ACCOUNT DELETION REQUEST ===== */
+
+$("deleteBtn").addEventListener("click", async () => {
+  const confirmed = await askConfirmation(
+    "Request Account Deletion",
+    "This will send a deletion request to the platform administrator. Your account will not be deleted immediately. Do you want to continue?"
+  );
+
+  if (!confirmed || !currentUser) return;
+
+  try {
+    await addDoc(collection(db, "accountDeletionRequests"), {
+      uid: currentUser.uid,
+      email: currentUser.email || "",
+      username: currentProfile.username || "",
+      status: "pending",
+      requestedAt: serverTimestamp()
+    });
+
+    showMessage(
+      "Request Submitted",
+      "Your account deletion request has been submitted. The administrator will review it."
+    );
+  } catch (error) {
+    console.error(error);
+    showMessage(
+      "Request Failed",
+      "We could not submit your request. Please contact support."
+    );
+  }
+});
+
+</script>
+</body>
+</html>
