@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087A43">
+<title>My Referrals | Helpinghands</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green: #087A43;
+  --green-dark: #075E35;
+  --gold: #D9A441;
+  --light: #F3F7F4;
+  --white: #FFFFFF;
+  --dark: #26352C;
+  --muted: #718078;
+  --border: #E2EAE4;
+  --shadow: 0 12px 35px rgba(10, 65, 35, .09);
+  --danger: #C34D42;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+button, input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ===== SITE HEADER ===== */
+
+.site-header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header-inner {
+  width: min(1100px, 92%);
+  margin: auto;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: white;
+  font-size: 23px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  padding: 9px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: white;
+  transition: .2s;
+}
+
+.header-link:hover {
+  background: var(--light);
+}
+
+/* ===== MAIN ===== */
+
+main {
+  width: min(1100px, 92%);
+  margin: 35px auto;
+  padding-bottom: 30px;
+}
+
+.heading {
+  margin-bottom: 25px;
+}
+
+.heading h1 {
+  font-size: 27px;
+  margin-bottom: 7px;
+}
+
+.heading p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* REFERRAL BANNER */
+
+.referral-banner {
+  background: linear-gradient(120deg, #087A43, #075B34);
+  color: white;
+  padding: 25px;
+  border-radius: 17px;
+  margin-bottom: 22px;
+  box-shadow: 0 12px 25px rgba(8,122,67,.13);
+  position: relative;
+  overflow: hidden;
+}
+
+.referral-banner::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  right: -70px;
+  top: -120px;
+}
+
+.referral-banner h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.referral-banner p {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: .9;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.link-box {
+  background: white;
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.link-box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 13px;
+  color: var(--dark);
+  background: white;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  border-radius: 9px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.copy-btn {
+  background: var(--gold);
+  color: #34240A;
+  white-space: nowrap;
+}
+
+.copy-btn:hover {
+  background: #C99538;
+}
+
+.share-btn {
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.3);
+  color: white;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.share-btn:hover {
+  background: rgba(255,255,255,.24);
+}
+
+/* STATS */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 21px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.stat-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.stat-card h2 {
+  color: var(--green);
+  font-size: 27px;
+}
+
+.stat-icon {
+  width: 37px;
+  height: 37px;
+  background: #EAF4ED;
+  color: var(--green);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+/* CARDS */
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+
+.card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.card-heading h3 {
+  font-size: 17px;
+  color: var(--green);
+}
+
+.card-heading p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 260px;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  outline: none;
+  font-size: 13px;
+  background: #FCFDFC;
+  transition: .2s;
+}
+
+.search-box:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(8,122,67,.09);
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+th, td {
+  text-align: left;
+  padding: 15px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+th {
+  color: var(--muted);
+  background: #F8FAF8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+td {
+  color: var(--dark);
+}
+
+.member-name {
+  font-weight: 700;
+}
+
+.member-username {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #EAF4ED;
+  color: var(--green);
+}
+
+.status.pending {
+  background: #FFF5DF;
+  color: #946500;
+}
+
+.status.inactive {
+  background: #FDECEC;
+  color: var(--danger);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 35px 15px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.empty-state strong {
+  display: block;
+  color: var(--dark);
+  font-size: 15px;
+  margin-bottom: 7px;
+}
+
+/* ACTIVITY */
+
+.activity-list {
+  display: grid;
+  gap: 17px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 13px;
+}
+
+.activity-item span {
+  color: var(--muted);
+}
+
+.activity-track {
+  width: 100%;
+  height: 9px;
+  background: #EAF0EB;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.activity-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 20px;
+  min-width: 0;
+  transition: width .3s;
+}
+
+/* LOADING */
+
+.loading {
+  text-align: center;
+  padding: 50px 15px;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 4px solid #DDEBE1;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 0 auto 14px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.bottom-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 15px 0 30px;
+}
+
+/* MODAL */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,30,20,.55);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  background: white;
+  width: min(420px, 100%);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: var(--shadow);
+  animation: appear .2s ease;
+}
+
+@keyframes appear {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-box h3 {
+  color: var(--green);
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.modal-box p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.primary-btn {
+  background: var(--green);
+  color: white;
+}
+
+.primary-btn:hover {
+  background: var(--green-dark);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 700px) {
+  .site-header-inner {
+    min-height: 64px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .header-link {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  main {
+    margin: 25px auto;
+  }
+
+  .heading h1 {
+    font-size: 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    padding: 17px;
+  }
+
+  .stat-card h2 {
+    font-size: 24px;
+  }
+
+  .referral-banner {
+    padding: 20px;
+  }
+
+  .link-box {
+    flex-wrap: wrap;
+  }
+
+  .link-box input {
+    flex-basis: 100%;
+  }
+
+  .copy-btn {
+    width: 100%;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+}
+
+@media(max-width: 400px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="home.html" class="logo">
+      <span class="logo-mark">H</span>
+      Helpinghands
+    </a>
+
+    <div class="header-actions">
+      <a href="home.html" class="header-link">← Dashboard</a>
+      <a href="account.html" class="header-link">Account</a>
+    </div>
+  </div>
+</header>
+
+<!-- LOADING -->
+<div class="loading" id="loadingScreen">
+  <div class="spinner"></div>
+  Loading your referrals...
+</div>
+
+<!-- MAIN CONTENT -->
+<main id="mainContent" style="display:none">
+
+  <section class="heading">
+    <h1>My Referrals</h1>
+    <p>View people who registered using your referral link.</p>
+  </section>
+
+  <section class="referral-banner">
+    <h2>Invite Your Friends</h2>
+    <p>
+      Share your personal referral link with people who may be interested
+      in joining the Helpinghands community.
+    </p>
+
+    <div class="link-box">
+      <input type="text" id="referralLink" readonly>
+      <button class="copy-btn" id="copyBtn">Copy Link</button>
+    </div>
+
+    <button class="share-btn" id="shareBtn">Share Referral Link</button>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <small>Total Referrals</small>
+      <h2 id="totalReferrals">0</h2>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">✓</div>
+      <small>Active Members</small>
+      <h2 id="activeReferrals">0</h2>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">◷</div>
+      <small>Pending Members</small>
+      <h2 id="pendingReferrals">0</h2>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-heading">
+      <div>
+        <h3>My Referral List</h3>
+        <p>Members registered through your referral link.</p>
+      </div>
+      <input
+        class="search-box"
+        id="searchInput"
+        type="search"
+        placeholder="Search name or username..."
+      >
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Registration Date</th>
+            <th>Account Status</th>
+          </tr>
+        </thead>
+        <tbody id="referralTable"></tbody>
+      </table>
+    </div>
+
+    <div class="empty-state" id="emptyState" style="display:none">
+      <strong>No referrals found</strong>
+      Your referral list will appear here when someone registers using your referral link.
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-heading">
+      <div>
+        <h3>Referral Activity</h3>
+        <p>Registrations during the last six calendar months.</p>
+      </div>
+    </div>
+
+    <div class="activity-list" id="activityList"></div>
+  </section>
+
+  <div class="bottom-note">
+    Helpinghands · Referral Overview
+  </div>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="messageModal">
+  <div class="modal-box">
+    <h3 id="modalTitle">Notification</h3>
+    <p id="modalMessage"></p>
+    <div class="modal-actions">
+      <button class="primary-btn" id="modalOk">OK</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDgKw66LXAJkviJdQMRVN254O71LOocGTA",
+  authDomain: "helpinghands-91d11.firebaseapp.com",
+  projectId: "helpinghands-91d11",
+  storageBucket: "helpinghands-91d11.firebasestorage.app",
+  messagingSenderId: "402651670418",
+  appId: "1:402651670418:web:59900378df2527043c034b"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let referrals = [];
+
+const $ = id => document.getElementById(id);
+
+/* ===== MODAL ===== */
+
+function showMessage(title, message) {
+  $("modalTitle").textContent = title;
+  $("modalMessage").textContent = message;
+  $("messageModal").classList.add("show");
+}
+
+$("modalOk").addEventListener("click", () => {
+  $("messageModal").classList.remove("show");
+});
+
+/* ===== HELPERS ===== */
+
+function formatDate(value) {
+  if (!value) return "Not available";
+
+  const date = value.toDate ? value.toDate() : new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "Not available";
+
+  return date.toLocaleDateString("en-NG", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+function getDate(value) {
+  if (!value) return null;
+  const date = value.toDate ? value.toDate() : new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function getStatus(member) {
+  return String(member.status || "Active").toLowerCase();
+}
+
+function statusClass(status) {
+  if (status === "pending" || status === "unverified") return "pending";
+  if (["inactive", "suspended", "disabled"].includes(status)) return "inactive";
+  return "";
+}
+
+function statusLabel(status) {
+  if (status === "unverified") return "Unverified";
+  return status.charAt(0).toUpperCase() + status.slice(1);
+}
+
+function buildReferralLink(uid) {
+  const url = new URL("index.html", window.location.href);
+  url.searchParams.set("ref", uid);
+  return url.href;
+}
+
+/* ===== RENDERERS ===== */
+
+function renderReferrals(list) {
+  const tbody = $("referralTable");
+  tbody.replaceChildren();
+
+  $("emptyState").style.display = list.length ? "none" : "block";
+
+  list.forEach(member => {
+    const tr = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    const name = document.createElement("div");
+    name.className = "member-name";
+    name.textContent = member.fullName || "Member";
+
+    const username = document.createElement("div");
+    username.className = "member-username";
+    username.textContent = member.username
+      ? "@" + member.username
+      : "Username unavailable";
+
+    nameCell.append(name, username);
+
+    const dateCell = document.createElement("td");
+    dateCell.textContent = formatDate(member.createdAt);
+
+    const statusCell = document.createElement("td");
+    const status = getStatus(member);
+    const badge = document.createElement("span");
+    badge.className = "status " + statusClass(status);
+    badge.textContent = statusLabel(status);
+    statusCell.appendChild(badge);
+
+    tr.append(nameCell, dateCell, statusCell);
+    tbody.appendChild(tr);
+  });
+}
+
+function renderActivity() {
+  const container = $("activityList");
+  container.replaceChildren();
+
+  const now = new Date();
+  const months = [];
+
+  for (let i = 5; i >= 0; i--) {
+    const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+
+    months.push({
+      year: date.getFullYear(),
+      month: date.getMonth(),
+      label: date.toLocaleDateString("en-NG", {
+        month: "short",
+        year: "numeric"
+      }),
+      count: 0
+    });
+  }
+
+  referrals.forEach(member => {
+    const date = getDate(member.createdAt);
+    if (!date) return;
+
+    const month = months.find(item =>
+      item.year === date.getFullYear() &&
+      item.month === date.getMonth()
+    );
+
+    if (month) month.count++;
+  });
+
+  const highest = Math.max(1, ...months.map(item => item.count));
+
+  months.forEach(item => {
+    const wrapper = document.createElement("div");
+
+    const row = document.createElement("div");
+    row.className = "activity-item";
+
+    const label = document.createElement("span");
+    label.textContent = item.label;
+
+    const count = document.createElement("strong");
+    count.textContent = item.count + (item.count === 1 ? " member" : " members");
+
+    row.append(label, count);
+
+    const track = document.createElement("div");
+    track.className = "activity-track";
+
+    const fill = document.createElement("div");
+    fill.className = "activity-fill";
+    fill.style.width = (item.count / highest * 100) + "%";
+
+    track.appendChild(fill);
+    wrapper.append(row, track);
+    container.appendChild(wrapper);
+  });
+}
+
+function renderStats() {
+  $("totalReferrals").textContent = referrals.length;
+
+  $("activeReferrals").textContent = referrals.filter(member =>
+    getStatus(member) === "active"
+  ).length;
+
+  $("pendingReferrals").textContent = referrals.filter(member =>
+    ["pending", "unverified"].includes(getStatus(member))
+  ).length;
+
+  renderReferrals(referrals);
+  renderActivity();
+}
+
+/* ===== DATA LOAD ===== */
+
+async function loadReferrals(user) {
+  $("loadingScreen").style.display = "block";
+  $("mainContent").style.display = "none";
+
+  $("referralLink").value = buildReferralLink(user.uid);
+
+  const referralsQuery = query(
+    collection(db, "users"),
+    where("inviterUid", "==", user.uid)
+  );
+
+  const snapshot = await getDocs(referralsQuery);
+
+  referrals = snapshot.docs.map(document => ({
+    id: document.id,
+    ...document.data()
+  }));
+
+  referrals.sort((a, b) => {
+    const dateA = getDate(a.createdAt);
+    const dateB = getDate(b.createdAt);
+    return (dateB?.getTime() || 0) - (dateA?.getTime() || 0);
+  });
+
+  renderStats();
+
+  $("loadingScreen").style.display = "none";
+  $("mainContent").style.display = "block";
+}
+
+/* ===== SEARCH ===== */
+
+$("searchInput").addEventListener("input", () => {
+  const search = $("searchInput").value.trim().toLowerCase();
+
+  const filtered = referrals.filter(member => {
+    const name = (member.fullName || "").toLowerCase();
+    const username = (member.username || "").toLowerCase();
+    return name.includes(search) || username.includes(search);
+  });
+
+  renderReferrals(filtered);
+});
+
+/* ===== COPY ===== */
+
+$("copyBtn").addEventListener("click", async () => {
+  const link = $("referralLink").value;
+
+  try {
+    await navigator.clipboard.writeText(link);
+    showMessage("Link Copied", "Your referral link has been copied successfully.");
+  } catch (error) {
+    $("referralLink").focus();
+    $("referralLink").select();
+    showMessage("Copy Link", "Select and copy your referral link from the box.");
+  }
+});
+
+/* ===== SHARE ===== */
+
+$("shareBtn").addEventListener("click", async () => {
+  const link = $("referralLink").value;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "Helpinghands",
+        text: "You can visit Helpinghands using my referral link:",
+        url: link
+      });
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        showMessage("Sharing Unavailable", "Please copy your referral link and share it manually.");
+      }
+    }
+  } else {
+    try {
+      await navigator.clipboard.writeText(link);
+      showMessage("Link Copied", "Sharing is not available in this browser. Your link has been copied.");
+    } catch (error) {
+      showMessage("Sharing Unavailable", "Please copy your referral link manually.");
+    }
+  }
+});
+
+/* ===== AUTH ===== */
+
+onAuthStateChanged(auth, async user => {
+  if (!user) {
+    window.location.replace("login.html");
+    return;
+  }
+
+  try {
+    await loadReferrals(user);
+  } catch (error) {
+    console.error("Referral loading error:", error);
+
+    $("loadingScreen").innerHTML =
+      "<p>We could not load your referrals. Please refresh the page or check your connection and database permissions.</p>";
+  }
+});
+</script>
+
+</body>
+</html>
