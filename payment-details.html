@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087A43">
+  <title>Helpinghands | Bank Details</title>
+
+  <style>
+    :root {
+      --green: #087A43;
+      --green-dark: #056235;
+      --gold: #D9A441;
+      --white: #FFFFFF;
+      --light: #F3F7F4;
+      --text: #26352C;
+      --muted: #748078;
+      --border: #E2EAE4;
+      --red: #D94848;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--white);
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .brand span { color: var(--gold); }
+
+    .back {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 650px;
+      margin: 45px auto;
+      padding: 0 18px;
+    }
+
+    .heading { margin-bottom: 24px; }
+
+    .heading h1 {
+      font-size: 27px;
+      margin-bottom: 9px;
+    }
+
+    .heading p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 27px;
+      border-radius: 17px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0,0,0,.035);
+    }
+
+    .notice {
+      background: #FDF8EC;
+      border: 1px solid #F1DFB5;
+      color: #765719;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 23px;
+    }
+
+    .field { margin-bottom: 19px; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+      background: white;
+      color: var(--text);
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(8,122,67,.08);
+    }
+
+    input.invalid, select.invalid {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(217,72,72,.08);
+    }
+
+    .field-error {
+      color: var(--red);
+      font-size: 12px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .field-error.show { display: block; }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+      min-height: 48px;
+    }
+
+    button:hover { background: var(--green-dark); }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .btn-secondary {
+      background: #EEF3EF;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover { background: #E1E9E3; }
+
+    .saved {
+      margin-top: 25px;
+      padding: 19px;
+      border-radius: 12px;
+      background: var(--light);
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .saved h3 {
+      color: var(--green);
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .saved-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .saved-row:last-child { border-bottom: none; }
+    .saved-row span:first-child { color: var(--muted); }
+
+    .saved-row strong {
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 9px;
+      font-size: 13px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .success {
+      display: block;
+      color: var(--green-dark);
+      background: #EAF7EF;
+    }
+
+    .error-msg {
+      display: block;
+      color: var(--red);
+      background: #FFF0F0;
+    }
+
+    .loading {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 20px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media(max-width: 480px) {
+      main { margin: 30px auto; }
+      .card { padding: 20px; }
+      .heading h1 { font-size: 23px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">Helping<span>hands</span></div>
+  <a class="back" href="home.html">← Dashboard</a>
+</header>
+
+<main>
+  <div class="heading">
+    <h1>Bank Details</h1>
+    <p>Save and manage the bank account information associated with your account.</p>
+  </div>
+
+  <div class="card">
+
+    <div class="notice">
+      <strong>Important:</strong> Ensure your bank details are accurate.
+      Only save an account you own or are authorized to manage.
+    </div>
+
+    <div id="loading" class="loading">Loading your account...</div>
+
+    <form id="bankForm" style="display:none" novalidate>
+
+      <div class="field">
+        <label for="bankName">Bank Name</label>
+        <select id="bankName" required>
+          <option value="">Select your bank</option>
+          <option>Access Bank</option>
+          <option>Access Bank (Diamond)</option>
+          <option>Citibank Nigeria</option>
+          <option>Ecobank Nigeria</option>
+          <option>Fidelity Bank</option>
+          <option>First Bank of Nigeria</option>
+          <option>First City Monument Bank (FCMB)</option>
+          <option>Globus Bank</option>
+          <option>Guaranty Trust Bank (GTBank)</option>
+          <option>Heritage Bank</option>
+          <option>Jaiz Bank</option>
+          <option>Keystone Bank</option>
+          <option>Moniepoint MFB</option>
+          <option>Opay</option>
+          <option>Palmpay</option>
+          <option>Polaris Bank</option>
+          <option>Premium Trust Bank</option>
+          <option>Providus Bank</option>
+          <option>Stanbic IBTC Bank</option>
+          <option>Standard Chartered Bank</option>
+          <option>Sterling Bank</option>
+          <option>SunTrust Bank</option>
+          <option>TAJBank</option>
+          <option>Union Bank</option>
+          <option>United Bank for Africa (UBA)</option>
+          <option>Unity Bank</option>
+          <option>Wema Bank</option>
+          <option>Zenith Bank</option>
+          <option>Other</option>
+        </select>
+        <div class="field-error" id="err-bankName">Please select your bank.</div>
+      </div>
+
+      <div class="field">
+        <label for="accountName">Account Name</label>
+        <input
+          type="text"
+          id="accountName"
+          placeholder="Enter account holder's name"
+          maxlength="100"
+          autocomplete="name"
+          required
+        >
+        <div class="field-error" id="err-accountName">
+          Please enter the account holder's name.
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="accountNumber">Account Number</label>
+        <input
+          type="text"
+          id="accountNumber"
+          placeholder="Enter 10-digit account number"
+          inputmode="numeric"
+          maxlength="10"
+          autocomplete="off"
+          required
+        >
+        <div class="field-error" id="err-accountNumber">
+          Please enter a valid 10-digit account number.
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="submit" id="saveBtn">Save Bank Details</button>
+        <button type="button" id="cancelBtn" class="btn-secondary" style="display:none">
+          Cancel
+        </button>
+      </div>
+
+    </form>
+
+    <div class="saved" id="savedDetails">
+      <h3>Saved Account Details</h3>
+
+      <div class="saved-row">
+        <span>Bank</span>
+        <strong id="displayBank">—</strong>
+      </div>
+
+      <div class="saved-row">
+        <span>Account Name</span>
+        <strong id="displayName">—</strong>
+      </div>
+
+      <div class="saved-row">
+        <span>Account Number</span>
+        <strong id="displayNumber">—</strong>
+      </div>
+    </div>
+
+    <div id="message" class="message"></div>
+
+  </div>
+</main>
+
+<footer>
+  Helpinghands © 2026. All rights reserved.
+</footer>
+
+<script type="module">
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+  import {
+    getAuth,
+    onAuthStateChanged
+  } from
+    "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    getDoc,
+    updateDoc,
+    serverTimestamp
+  } from
+    "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDgKw66LXAJkviJdQMRVN254O71LOocGTA",
+    authDomain: "helpinghands-91d11.firebaseapp.com",
+    projectId: "helpinghands-91d11",
+    storageBucket: "helpinghands-91d11.firebasestorage.app",
+    messagingSenderId: "402651670418",
+    appId: "1:402651670418:web:59900378df2527043c034b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const form = document.getElementById("bankForm");
+  const loading = document.getElementById("loading");
+  const message = document.getElementById("message");
+  const saveBtn = document.getElementById("saveBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const savedDetails = document.getElementById("savedDetails");
+
+  const bankName = document.getElementById("bankName");
+  const accountName = document.getElementById("accountName");
+  const accountNumber = document.getElementById("accountNumber");
+
+  let currentUser = null;
+  let originalData = { bankName: "", accountName: "", accountNumber: "" };
+
+  function showMessage(text, type) {
+    message.textContent = text;
+    message.className = "message " + type;
+    if (type === "success") {
+      setTimeout(() => {
+        message.className = "message";
+      }, 4000);
+    }
+  }
+
+  function clearFieldErrors() {
+    ["bankName", "accountName", "accountNumber"].forEach(field => {
+      document.getElementById("err-" + field).classList.remove("show");
+      document.getElementById(field).classList.remove("invalid");
+    });
+  }
+
+  function showFieldError(field, msg) {
+    const errEl = document.getElementById("err-" + field);
+    const input = document.getElementById(field);
+    if (msg) errEl.textContent = msg;
+    errEl.classList.add("show");
+    input.classList.add("invalid");
+  }
+
+  function validate() {
+    clearFieldErrors();
+    let ok = true;
+
+    if (!bankName.value.trim()) {
+      showFieldError("bankName");
+      ok = false;
+    }
+
+    if (!accountName.value.trim() || accountName.value.trim().length < 3) {
+      showFieldError("accountName", "Please enter the account holder's full name.");
+      ok = false;
+    }
+
+    if (!/^\d{10}$/.test(accountNumber.value.trim())) {
+      showFieldError("accountNumber");
+      ok = false;
+    }
+
+    return ok;
+  }
+
+  function displaySavedDetails(data) {
+    if (!data.bankName || !data.accountName || !data.accountNumber) {
+      savedDetails.style.display = "none";
+      return;
+    }
+
+    document.getElementById("displayBank").textContent = data.bankName;
+    document.getElementById("displayName").textContent = data.accountName;
+
+    const number = String(data.accountNumber);
+    document.getElementById("displayNumber").textContent =
+      "••••••" + number.slice(-4);
+
+    savedDetails.style.display = "block";
+  }
+
+  function fillForm(data) {
+    bankName.value = data.bankName || "";
+    accountName.value = data.accountName || "";
+    accountNumber.value = data.accountNumber || "";
+    originalData = {
+      bankName: data.bankName || "",
+      accountName: data.accountName || "",
+      accountNumber: data.accountNumber || ""
+    };
+    updateCancelVisibility();
+  }
+
+  function updateCancelVisibility() {
+    const changed =
+      bankName.value !== originalData.bankName ||
+      accountName.value !== originalData.accountName ||
+      accountNumber.value !== originalData.accountNumber;
+
+    cancelBtn.style.display = changed ? "block" : "none";
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    currentUser = user;
+
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        showMessage("Your account profile could not be found.", "error-msg");
+        loading.style.display = "none";
+        return;
+      }
+
+      const data = userSnap.data();
+
+      fillForm(data);
+      displaySavedDetails(data);
+
+      form.style.display = "block";
+      loading.style.display = "none";
+
+      saveBtn.textContent = data.bankName
+        ? "Update Bank Details"
+        : "Save Bank Details";
+
+    } catch (error) {
+      console.error(error);
+      loading.textContent =
+        "Unable to load your bank details. Check your connection and Firestore rules.";
+    }
+  });
+
+  accountNumber.addEventListener("input", () => {
+    accountNumber.value = accountNumber.value.replace(/\D/g, "").slice(0, 10);
+    updateCancelVisibility();
+  });
+
+  [bankName, accountName].forEach(el => {
+    el.addEventListener("input", updateCancelVisibility);
+    el.addEventListener("change", updateCancelVisibility);
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    fillForm(originalData);
+    clearFieldErrors();
+    message.className = "message";
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!currentUser) return;
+
+    if (!validate()) {
+      showMessage("Please fix the highlighted fields below.", "error-msg");
+      return;
+    }
+
+    const bank = bankName.value.trim();
+    const name = accountName.value.trim();
+    const number = accountNumber.value.trim();
+
+    saveBtn.disabled = true;
+    cancelBtn.disabled = true;
+    const previousLabel = saveBtn.textContent;
+    saveBtn.textContent = "Saving...";
+
+    try {
+      const userRef = doc(db, "users", currentUser.uid);
+
+      await updateDoc(userRef, {
+        bankName: bank,
+        accountName: name,
+        accountNumber: number,
+        bankDetailsUpdatedAt: serverTimestamp()
+      });
+
+      originalData = { bankName: bank, accountName: name, accountNumber: number };
+      displaySavedDetails(originalData);
+      updateCancelVisibility();
+
+      showMessage("Your bank details have been saved successfully.", "success");
+      saveBtn.textContent = "Update Bank Details";
+
+    } catch (error) {
+      console.error(error);
+      showMessage(
+        "Unable to save bank details. Check your internet connection and Firestore security rules.",
+        "error-msg"
+      );
+      saveBtn.textContent = previousLabel;
+    } finally {
+      saveBtn.disabled = false;
+      cancelBtn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
