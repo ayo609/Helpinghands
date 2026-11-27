@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087A43">
+  <title>Helpinghands | Notifications</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #087A43;
+      --green-dark: #075E35;
+      --gold: #D9A441;
+      --light: #F3F7F4;
+      --white: #FFFFFF;
+      --dark: #26352C;
+      --muted: #718078;
+      --border: #E2EAE4;
+      --danger: #C34D42;
+      --shadow: 0 12px 35px rgba(10, 65, 35, .09);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===== SITE HEADER ===== */
+
+    .site-header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .site-header-inner {
+      width: min(1000px, 92%);
+      margin: auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      font-size: 23px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-link {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green);
+      padding: 9px 14px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: white;
+      transition: .2s;
+    }
+
+    .header-link:hover {
+      background: var(--light);
+    }
+
+    /* ===== MAIN ===== */
+
+    main {
+      width: min(1000px, 92%);
+      margin: 35px auto;
+      padding-bottom: 40px;
+    }
+
+    .page-heading {
+      margin-bottom: 25px;
+    }
+
+    .page-heading h1 {
+      font-size: 27px;
+      margin-bottom: 7px;
+    }
+
+    .page-heading p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* SUMMARY */
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+      margin-bottom: 25px;
+    }
+
+    .summary-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .summary-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      background: #EAF4ED;
+      border-radius: 9px;
+      color: var(--green);
+      font-size: 17px;
+    }
+
+    .summary-value {
+      font-size: 27px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    /* NOTIFICATION PANEL */
+
+    .notification-panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 {
+      font-size: 17px;
+      color: var(--green);
+    }
+
+    .panel-header p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .mark-all-btn {
+      border: 0;
+      background: #EAF4ED;
+      color: var(--green);
+      padding: 10px 13px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .mark-all-btn:hover {
+      background: #DCEFE2;
+    }
+
+    .mark-all-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* FILTERS */
+
+    .filter-bar {
+      padding: 16px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .filters {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: white;
+      padding: 8px 13px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: .2s;
+    }
+
+    .filter-btn.active {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    .category-select {
+      border: 1px solid var(--border);
+      padding: 9px 12px;
+      border-radius: 8px;
+      outline: none;
+      background: white;
+      color: var(--dark);
+      font-size: 11px;
+      transition: .2s;
+    }
+
+    .category-select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(8,122,67,.09);
+    }
+
+    /* NOTIFICATION ITEMS */
+
+    .notification-list {
+      min-height: 250px;
+    }
+
+    .notification-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 19px 22px;
+      border-bottom: 1px solid #EEF2EF;
+      transition: .2s;
+    }
+
+    .notification-item:last-child {
+      border-bottom: 0;
+    }
+
+    .notification-item:hover {
+      background: #FCFDFC;
+    }
+
+    .notification-item.unread {
+      background: #F7FBF8;
+    }
+
+    .notification-icon {
+      width: 43px;
+      height: 43px;
+      min-width: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #EAF4ED;
+      color: var(--green);
+      font-size: 19px;
+    }
+
+    .notification-icon.security {
+      background: #FFF5E5;
+      color: #B17A17;
+    }
+
+    .notification-icon.announcement {
+      background: #F0EDFA;
+      color: #7655B5;
+    }
+
+    .notification-icon.update {
+      background: #EAF2FB;
+      color: #3675B8;
+    }
+
+    .notification-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .notification-title-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .notification-title {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .unread-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .notification-message {
+      color: #68766D;
+      font-size: 12px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .notification-meta {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-top: 9px;
+      color: #94A098;
+      font-size: 10px;
+    }
+
+    .category-tag {
+      background: #F0F4F1;
+      padding: 3px 8px;
+      border-radius: 20px;
+      color: #637269;
+      font-weight: 700;
+    }
+
+    .notification-actions {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .action-btn {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      padding: 7px 9px;
+      border-radius: 7px;
+      font-size: 10px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .action-btn:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .action-btn.delete:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    /* EMPTY / LOADING */
+
+    .empty-state {
+      padding: 65px 20px;
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 65px;
+      height: 65px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: #EAF4ED;
+      color: var(--green);
+      font-size: 27px;
+    }
+
+    .empty-state h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .empty-state p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .loading {
+      padding: 65px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .error-message {
+      padding: 20px;
+      color: var(--danger);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      padding: 13px 18px;
+      background: var(--green-dark);
+      color: white;
+      border-radius: 9px;
+      font-size: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(15px);
+      pointer-events: none;
+      transition: .25s;
+      z-index: 400;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width: 900px) {
+      .notification-item {
+        flex-wrap: wrap;
+      }
+
+      .notification-actions {
+        width: 100%;
+        padding-left: 57px;
+      }
+    }
+
+    @media(max-width: 650px) {
+      .site-header-inner {
+        min-height: 64px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+      }
+
+      .header-link {
+        padding: 8px 11px;
+        font-size: 12px;
+      }
+
+      main {
+        margin: 25px auto;
+      }
+
+      .page-heading h1 {
+        font-size: 22px;
+      }
+
+      .summary-grid {
+        gap: 9px;
+      }
+
+      .summary-card {
+        padding: 13px 10px;
+      }
+
+      .summary-label {
+        font-size: 10px;
+      }
+
+      .summary-value {
+        font-size: 22px;
+      }
+
+      .summary-icon {
+        width: 29px;
+        height: 29px;
+        font-size: 14px;
+      }
+
+      .panel-header {
+        padding: 17px 14px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .filter-bar {
+        padding: 13px;
+      }
+
+      .notification-item {
+        padding: 16px 13px;
+        gap: 10px;
+      }
+
+      .notification-icon {
+        width: 37px;
+        height: 37px;
+        min-width: 37px;
+        font-size: 16px;
+      }
+
+      .notification-actions {
+        padding-left: 47px;
+      }
+
+      .toast {
+        right: 15px;
+        left: 15px;
+        bottom: 25px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="home.html" class="logo">
+      <span class="logo-mark">H</span>
+      Helpinghands
+    </a>
+
+    <div class="header-actions">
+      <a href="home.html" class="header-link">← Dashboard</a>
+      <a href="account.html" class="header-link">Account</a>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <div class="page-heading">
+    <h1>Notifications</h1>
+    <p>Stay updated with your account activities.</p>
+  </div>
+
+  <!-- SUMMARY -->
+  <section class="summary-grid">
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span class="summary-label">All Notifications</span>
+        <span class="summary-icon">♢</span>
+      </div>
+      <div class="summary-value" id="totalCount">0</div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span class="summary-label">Unread</span>
+        <span class="summary-icon">●</span>
+      </div>
+      <div class="summary-value" id="unreadCount">0</div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-top">
+        <span class="summary-label">Read</span>
+        <span class="summary-icon">✓</span>
+      </div>
+      <div class="summary-value" id="readCount">0</div>
+    </div>
+
+  </section>
+
+  <!-- NOTIFICATIONS -->
+  <section class="notification-panel">
+
+    <div class="panel-header">
+      <div>
+        <h2>All Notifications</h2>
+        <p>Your latest account messages and updates.</p>
+      </div>
+
+      <button class="mark-all-btn" id="markAllBtn" disabled>
+        Mark all as read
+      </button>
+    </div>
+
+    <div class="filter-bar">
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="unread">Unread</button>
+        <button class="filter-btn" data-filter="read">Read</button>
+      </div>
+
+      <select class="category-select" id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="account">Account</option>
+        <option value="announcement">Announcements</option>
+        <option value="security">Security</option>
+        <option value="update">Updates</option>
+      </select>
+
+    </div>
+
+    <div class="notification-list" id="notificationList">
+      <div class="loading">Loading your notifications...</div>
+    </div>
+
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+  import {
+    getAuth,
+    onAuthStateChanged
+  } from
+    "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    onSnapshot,
+    updateDoc,
+    deleteDoc,
+    doc
+  } from
+    "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+  /* ===== FIREBASE ===== */
+  const firebaseConfig = {
+    apiKey: "AIzaSyDgKw66LXAJkviJdQMRVN254O71LOocGTA",
+    authDomain: "helpinghands-91d11.firebaseapp.com",
+    projectId: "helpinghands-91d11",
+    storageBucket: "helpinghands-91d11.firebasestorage.app",
+    messagingSenderId: "402651670418",
+    appId: "1:402651670418:web:59900378df2527043c034b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  /* ===== ELEMENTS ===== */
+  const notificationList = document.getElementById("notificationList");
+  const totalCount = document.getElementById("totalCount");
+  const unreadCount = document.getElementById("unreadCount");
+  const readCount = document.getElementById("readCount");
+  const markAllBtn = document.getElementById("markAllBtn");
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  /* ===== STATE ===== */
+  let notifications = [];
+  let currentFilter = "all";
+  let currentCategory = "all";
+  let unsubscribeNotifications = null;
+
+  /* ===== TOAST ===== */
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2600);
+  }
+
+  /* ===== DATE ===== */
+  function formatDate(timestamp) {
+    if (!timestamp) return "Date unavailable";
+
+    let date;
+    if (typeof timestamp.toDate === "function") {
+      date = timestamp.toDate();
+    } else if (timestamp instanceof Date) {
+      date = timestamp;
+    } else {
+      return "Date unavailable";
+    }
+
+    return date.toLocaleString("en-NG", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  }
+
+  /* ===== CATEGORY META ===== */
+  function getCategoryDetails(type) {
+    const category = String(type || "account").toLowerCase();
+
+    const details = {
+      account:      { label: "Account",      icon: "♙", className: "" },
+      announcement: { label: "Announcement", icon: "▤", className: "announcement" },
+      security:     { label: "Security",     icon: "♢", className: "security" },
+      update:       { label: "Update",       icon: "↻", className: "update" }
+    };
+
+    return details[category] || details.account;
+  }
+
+  /* ===== SUMMARY ===== */
+  function updateSummary() {
+    const total = notifications.length;
+    const unread = notifications.filter(item => item.isRead !== true).length;
+    const read = total - unread;
+
+    totalCount.textContent = total;
+    unreadCount.textContent = unread;
+    readCount.textContent = read;
+
+    markAllBtn.disabled = unread === 0;
+  }
+
+  /* ===== EMPTY ===== */
+  function showEmptyState() {
+    notificationList.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">♢</div>
+        <h3>No notifications found</h3>
+        <p>There are no notifications matching your selection.</p>
+      </div>
+    `;
+  }
+
+  /* ===== ELEMENT BUILDER ===== */
+  function createNotificationElement(item) {
+    const details = getCategoryDetails(item.type);
+
+    const wrapper = document.createElement("article");
+    wrapper.className = "notification-item" + (item.isRead === true ? "" : " unread");
+
+    const icon = document.createElement("div");
+    icon.className = "notification-icon " + details.className;
+    icon.textContent = details.icon;
+
+    const content = document.createElement("div");
+    content.className = "notification-content";
+
+    const titleRow = document.createElement("div");
+    titleRow.className = "notification-title-row";
+
+    const title = document.createElement("span");
+    title.className = "notification-title";
+    title.textContent = item.title || "Notification";
+
+    titleRow.appendChild(title);
+
+    if (item.isRead !== true) {
+      const dot = document.createElement("span");
+      dot.className = "unread-dot";
+      titleRow.appendChild(dot);
+    }
+
+    const message = document.createElement("p");
+    message.className = "notification-message";
+    message.textContent = item.message || "";
+
+    const meta = document.createElement("div");
+    meta.className = "notification-meta";
+
+    const date = document.createElement("span");
+    date.textContent = formatDate(item.createdAt);
+
+    const category = document.createElement("span");
+    category.className = "category-tag";
+    category.textContent = details.label;
+
+    meta.append(date, category);
+    content.append(titleRow, message, meta);
+
+    const actions = document.createElement("div");
+    actions.className = "notification-actions";
+
+    if (item.isRead !== true) {
+      const readButton = document.createElement("button");
+      readButton.className = "action-btn";
+      readButton.textContent = "Mark as read";
+      readButton.addEventListener("click", () => markAsRead(item.id));
+      actions.appendChild(readButton);
+    }
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "action-btn delete";
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => deleteNotification(item.id));
+    actions.appendChild(deleteButton);
+
+    wrapper.append(icon, content, actions);
+    return wrapper;
+  }
+
+  /* ===== RENDER ===== */
+  function renderNotifications() {
+    updateSummary();
+
+    const filtered = notifications.filter(item => {
+      const matchesRead =
+        currentFilter === "all" ||
+        (currentFilter === "unread" && item.isRead !== true) ||
+        (currentFilter === "read" && item.isRead === true);
+
+      const matchesCategory =
+        currentCategory === "all" ||
+        String(item.type || "account").toLowerCase() === currentCategory;
+
+      return matchesRead && matchesCategory;
+    });
+
+    notificationList.innerHTML = "";
+
+    if (filtered.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    filtered.forEach(item => fragment.appendChild(createNotificationElement(item)));
+    notificationList.appendChild(fragment);
+  }
+
+  /* ===== MARK ONE ===== */
+  async function markAsRead(notificationId) {
+    try {
+      await updateDoc(doc(db, "notifications", notificationId), { isRead: true });
+      showToast("Notification marked as read.");
+    } catch (error) {
+      console.error(error);
+      showToast("Could not update notification.");
+    }
+  }
+
+  /* ===== MARK ALL ===== */
+  markAllBtn.addEventListener("click", async () => {
+    const unread = notifications.filter(item => item.isRead !== true);
+    if (unread.length === 0) return;
+
+    markAllBtn.disabled = true;
+    markAllBtn.textContent = "Updating...";
+
+    try {
+      await Promise.all(
+        unread.map(item =>
+          updateDoc(doc(db, "notifications", item.id), { isRead: true })
+        )
+      );
+      showToast("All notifications marked as read.");
+    } catch (error) {
+      console.error(error);
+      showToast("Some notifications could not be updated.");
+    } finally {
+      markAllBtn.textContent = "Mark all as read";
+    }
+  });
+
+  /* ===== DELETE ===== */
+  async function deleteNotification(notificationId) {
+    const confirmed = confirm("Are you sure you want to delete this notification?");
+    if (!confirmed) return;
+
+    try {
+      await deleteDoc(doc(db, "notifications", notificationId));
+      showToast("Notification deleted.");
+    } catch (error) {
+      console.error(error);
+      showToast("Could not delete notification.");
+    }
+  }
+
+  /* ===== FILTERS ===== */
+  document.querySelectorAll(".filter-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
+      currentFilter = button.dataset.filter;
+      renderNotifications();
+    });
+  });
+
+  categoryFilter.addEventListener("change", () => {
+    currentCategory = categoryFilter.value;
+    renderNotifications();
+  });
+
+  /* ===== AUTH + REALTIME ===== */
+  onAuthStateChanged(auth, user => {
+
+    if (unsubscribeNotifications) {
+      unsubscribeNotifications();
+      unsubscribeNotifications = null;
+    }
+
+    if (!user) {
+      window.location.replace("login.html");
+      return;
+    }
+
+    notificationList.innerHTML =
+      '<div class="loading">Loading your notifications...</div>';
+
+    const notificationsQuery = query(
+      collection(db, "notifications"),
+      where("uid", "==", user.uid)
+    );
+
+    unsubscribeNotifications = onSnapshot(
+      notificationsQuery,
+
+      snapshot => {
+        notifications = snapshot.docs.map(document => ({
+          id: document.id,
+          ...document.data()
+        }));
+
+        notifications.sort((a, b) => {
+          const dateA = a.createdAt?.toMillis?.() || 0;
+          const dateB = b.createdAt?.toMillis?.() || 0;
+          return dateB - dateA;
+        });
+
+        renderNotifications();
+      },
+
+      error => {
+        console.error("Notification loading error:", error);
+        notificationList.innerHTML = `
+          <div class="error-message">
+            Unable to load notifications.
+            Please check your internet connection and Firebase permissions.
+          </div>
+        `;
+      }
+    );
+  });
+
+</script>
+
+</body>
+</html>
