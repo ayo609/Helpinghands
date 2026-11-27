@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087A43">
+  <title>Helpinghands | Membership Circles</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #087A43;
+      --green-dark: #056333;
+      --gold: #D9A441;
+      --white: #fff;
+      --light: #F3F7F4;
+      --text: #26352C;
+      --muted: #758078;
+      --border: #E5ECE7;
+      --red: #C33E3E;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--light);
+      color: var(--text);
+    }
+
+    button { font: inherit; cursor: pointer; }
+
+    .sidebar {
+      width: 245px;
+      background: white;
+      border-right: 1px solid var(--border);
+      position: fixed;
+      inset: 0 auto 0 0;
+      padding: 27px 17px;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .brand {
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0 0 38px 10px;
+    }
+
+    .nav-link {
+      display: block;
+      text-decoration: none;
+      color: var(--muted);
+      padding: 13px;
+      border-radius: 10px;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      background: #EAF5EE;
+      color: var(--green);
+    }
+
+    .logout {
+      margin-top: auto;
+      border: 0;
+      padding: 13px;
+      border-radius: 9px;
+      background: #FFF0F0;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    main {
+      margin-left: 245px;
+      padding: 30px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    h1 { font-size: 24px; }
+    .subtitle { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+    .avatar {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      background: #E0F2E6;
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .welcome {
+      background: linear-gradient(110deg, #087A43, #11975A);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 22px;
+    }
+
+    .welcome h2 { font-size: 20px; margin-bottom: 8px; }
+    .welcome p { font-size: 12px; line-height: 1.8; opacity: .95; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat, .panel, .circle-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .stat { padding: 19px; }
+    .stat span { color: var(--muted); font-size: 11px; font-weight: 600; }
+    .stat h3 { color: var(--green); font-size: 22px; margin-top: 10px; }
+
+    .panel { padding: 21px; margin-bottom: 22px; }
+
+    .panel h2 {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .panel-description {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: -8px;
+      margin-bottom: 15px;
+      line-height: 1.7;
+    }
+
+    .circle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+
+    .circle-card { padding: 18px; }
+
+    .circle-card.current {
+      border: 2px solid var(--green);
+      background: #F8FCF9;
+    }
+
+    .circle-number {
+      display: inline-grid;
+      place-items: center;
+      width: 33px;
+      height: 33px;
+      border-radius: 9px;
+      background: #EAF5EE;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 12px;
+      margin-bottom: 13px;
+    }
+
+    .circle-card h3 { font-size: 14px; margin-bottom: 8px; }
+    .circle-card p { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+    .tag {
+      display: inline-block;
+      background: #EAF5EE;
+      color: var(--green);
+      padding: 5px 8px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 800;
+      margin-top: 12px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+
+    .info-row:last-child { border-bottom: 0; }
+    .info-row span { color: var(--muted); }
+    .info-row strong { text-align: right; overflow-wrap: anywhere; }
+
+    .empty {
+      text-align: center;
+      padding: 25px 12px;
+      background: #FAFCFA;
+      color: var(--muted);
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .error {
+      display: none;
+      padding: 13px;
+      margin-bottom: 18px;
+      background: #FFF0F0;
+      color: var(--red);
+      font-size: 12px;
+      border-radius: 9px;
+    }
+
+    .notice {
+      background: #FFF8E9;
+      border-left: 4px solid var(--gold);
+      color: #74551B;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 11px;
+      line-height: 1.8;
+      margin-bottom: 23px;
+    }
+
+    .notice.green {
+      background: #EAF5EE;
+      border-left-color: var(--green);
+      color: #1F5636;
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 450px;
+      font-size: 11px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 13px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th { color: var(--muted); font-weight: 700; }
+
+    .status {
+      display: inline-block;
+      padding: 5px 8px;
+      border-radius: 20px;
+      background: #FFF4DF;
+      color: #9A6814;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .status.confirmed,
+    .status.active {
+      background: #E3F5E9;
+      color: var(--green);
+    }
+
+    .status.rejected {
+      background: #FCE8E8;
+      color: var(--red);
+    }
+
+    .status.pending {
+      background: #FFF4DF;
+      color: #9A6814;
+    }
+
+    /* NEW — pending confirmation cards */
+    .confirm-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .confirm-card {
+      background: #FAFCFA;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .confirm-card h4 {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .confirm-meta {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .confirm-meta strong { color: var(--text); }
+
+    .confirm-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      min-height: 40px;
+    }
+
+    .btn-confirm {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-confirm:hover { background: var(--green-dark); }
+    .btn-confirm:disabled,
+    .btn-reject:disabled { opacity: .55; cursor: not-allowed; }
+
+    .btn-reject {
+      background: #FFF0F0;
+      color: var(--red);
+    }
+
+    .mobile-nav { display: none; }
+
+    @media(max-width: 1050px) {
+      .circle-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media(max-width: 750px) {
+      .sidebar { display: none; }
+      main { margin-left: 0; padding: 22px 15px 95px; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .circle-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .circle-card { padding: 13px; }
+      h1 { font-size: 21px; }
+
+      .mobile-nav {
+        position: fixed;
+        display: flex;
+        justify-content: space-around;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid var(--border);
+        padding: 12px 4px calc(12px + env(safe-area-inset-bottom));
+        z-index: 20;
+      }
+
+      .mobile-nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .mobile-nav a.active { color: var(--green); }
+
+      .btn { width: 100%; }
+    }
+
+    @media(max-width: 370px) {
+      .circle-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+  <div class="brand">Helpinghands.</div>
+  <nav>
+    <a class="nav-link" href="home.html">⌂ Dashboard</a>
+    <a class="nav-link" href="account.html">♙ My Account</a>
+    <a class="nav-link" href="referrals.html">♧ Referrals</a>
+    <a class="nav-link active" href="circles.html">◉ Circles</a>
+    <a class="nav-link" href="notifications.html">♧ Notifications</a>
+    <a class="nav-link" href="announcements.html">▤ Announcements</a>
+  </nav>
+  <button class="logout" id="logoutBtn">Logout</button>
+</aside>
+
+<main>
+  <header class="topbar">
+    <div>
+      <h1>Membership Circles</h1>
+      <p class="subtitle">Your membership information and activity.</p>
+    </div>
+    <div class="avatar" id="avatar">U</div>
+  </header>
+
+  <div id="errorBox" class="error"></div>
+
+  <section class="welcome">
+    <h2>My Membership Overview</h2>
+    <p>
+      View your membership level, account information, referral activity
+      and recorded membership history.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="stat">
+      <span>Current Membership Level</span>
+      <h3 id="currentStage">Starter</h3>
+    </div>
+    <div class="stat">
+      <span>Membership Level Number</span>
+      <h3 id="stageNumber">01 / 15</h3>
+    </div>
+    <div class="stat">
+      <span>Account Status</span>
+      <h3 id="accountStatus">Loading</h3>
+    </div>
+    <div class="stat">
+      <span>Direct Referrals</span>
+      <h3 id="directReferrals">0</h3>
+    </div>
+    <div class="stat">
+      <span>Referral Group</span>
+      <h3 id="groupMembers">0</h3>
+    </div>
+    <div class="stat">
+      <span>Recorded Milestones</span>
+      <h3 id="milestoneCount">0</h3>
+    </div>
+  </section>
+
+  <div class="notice">
+    Membership amounts shown below are historical plan information only.
+    They are not guaranteed earnings, payable balances or promises of return.
+  </div>
+
+  <!-- NEW: Payment confirmations panel -->
+  <section class="panel" id="confirmPanel">
+    <h2>Payments Awaiting Your Confirmation</h2>
+    <p class="panel-description">
+      When a direct referral submits a payment record, you review it here and
+      confirm once you have actually received the payment. Confirmations are
+      manual — nothing is confirmed automatically.
+    </p>
+    <div class="notice green">
+      Only confirm a payment after you have personally received it from your
+      direct referral. Your confirmation activates their membership record.
+    </div>
+    <div id="confirmList" class="confirm-list">
+      <div class="empty">Loading pending confirmations...</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>All 15 Membership Levels</h2>
+    <p class="panel-description">
+      Browse the original Helpinghands level names and their recorded
+      historical plan figures.
+    </p>
+    <div class="circle-grid" id="circleGrid">
+      <div class="empty">Loading membership levels...</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>My Account Information</h2>
+    <div class="info-row"><span>Full Name</span><strong id="fullName">Loading</strong></div>
+    <div class="info-row"><span>Username</span><strong id="username">Loading</strong></div>
+    <div class="info-row"><span>Email</span><strong id="email">Loading</strong></div>
+    <div class="info-row"><span>Phone</span><strong id="phone">Loading</strong></div>
+    <div class="info-row"><span>Registration Date</span><strong id="createdAt">Loading</strong></div>
+    <div class="info-row"><span>Member ID</span><strong id="memberId">Loading</strong></div>
+  </section>
+
+  <section class="panel">
+    <h2>My Referral Group</h2>
+    <p class="panel-description">
+      Members connected to your referral account.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Username</th>
+            <th>Joined</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="referralRows">
+          <tr><td colspan="4">Loading referral records...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Membership History</h2>
+    <div id="historyContainer" class="empty">
+      Loading membership history...
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Verified Transaction Records</h2>
+    <p class="panel-description">
+      Records are displayed using their current verification status.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="transactionRows">
+          <tr><td colspan="4">Loading transaction records...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<nav class="mobile-nav">
+  <a href="home.html">⌂<br>Home</a>
+  <a href="account.html">♙<br>Account</a>
+  <a href="referrals.html">♧<br>Referrals</a>
+  <a class="active" href="circles.html">◉<br>Circles</a>
+  <a href="notifications.html">♧<br>Alerts</a>
+</nav>
+
+<script type="module">
+  import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    getDoc,
+    updateDoc,
+    collection,
+    query,
+    where,
+    getDocs,
+    serverTimestamp,
+    writeBatch
+  } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDgKw66LXAJkviJdQMRVN254O71LOocGTA",
+    authDomain: "helpinghands-91d11.firebaseapp.com",
+    projectId: "helpinghands-91d11",
+    storageBucket: "helpinghands-91d11.firebasestorage.app",
+    messagingSenderId: "402651670418",
+    appId: "1:402651670418:web:59900378df2527043c034b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const circles = [
+    ["Starter", 5000, 25000],
+    ["Bronze", 10000, 50000],
+    ["Silver", 20000, 100000],
+    ["Gold", 30000, 150000],
+    ["Platinum", 40000, 200000],
+    ["Diamond", 50000, 250000],
+    ["Ruby", 60000, 300000],
+    ["Emerald", 70000, 350000],
+    ["Sapphire", 80000, 400000],
+    ["Royal", 90000, 450000],
+    ["Legend", 100000, 500000],
+    ["Legend Level 2", 200000, 1000000],
+    ["Legend Level 3", 400000, 2000000],
+    ["Legend Level 4", 600000, 3000000],
+    ["Legend Level 5", 800000, 4000000]
+  ];
+
+  const $ = id => document.getElementById(id);
+
+  const money = value => new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+    maximumFractionDigits: 0
+  }).format(Number(value || 0));
+
+  function dateText(value) {
+    if (!value) return "Not available";
+    const date = value.toDate ? value.toDate() : new Date(value);
+    if (Number.isNaN(date.getTime())) return "Not available";
+    return date.toLocaleDateString("en-NG", {
+      day: "numeric", month: "short", year: "numeric"
+    });
+  }
+
+  function error(message) {
+    $("errorBox").textContent = message;
+    $("errorBox").style.display = "block";
+  }
+
+  function clearError() {
+    $("errorBox").style.display = "none";
+    $("errorBox").textContent = "";
+  }
+
+  function safeText(element, value) {
+    element.textContent = value ?? "Not provided";
+  }
+
+  function renderCircles(stage) {
+    const grid = $("circleGrid");
+    grid.replaceChildren();
+
+    circles.forEach(([name, amount, target], index) => {
+      const card = document.createElement("article");
+      const current = name.toLowerCase() === String(stage).toLowerCase();
+
+      card.className = "circle-card" + (current ? " current" : "");
+
+      const number = document.createElement("div");
+      number.className = "circle-number";
+      number.textContent = String(index + 1).padStart(2, "0");
+
+      const heading = document.createElement("h3");
+      heading.textContent = name;
+
+      const amountText = document.createElement("p");
+      amountText.textContent = "Original amount: " + money(amount);
+
+      const targetText = document.createElement("p");
+      targetText.textContent = "Historical target: " + money(target);
+
+      card.append(number, heading, amountText, targetText);
+
+      if (current) {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = "CURRENT MEMBERSHIP LEVEL";
+        card.appendChild(tag);
+      }
+
+      grid.appendChild(card);
+    });
+  }
+
+  async function loadPendingConfirmations(uid) {
+    const container = $("confirmList");
+    container.replaceChildren();
+
+    try {
+      const submissionsQuery = query(
+        collection(db, "paymentSubmissions"),
+        where("uplineUid", "==", uid),
+        where("status", "==", "pending")
+      );
+
+      const snapshot = await getDocs(submissionsQuery);
+
+      if (snapshot.empty) {
+        container.innerHTML =
+          '<div class="empty">No pending payments to confirm right now.</div>';
+        return;
+      }
+
+      snapshot.docs.forEach(item => {
+        const data = item.data();
+        const card = document.createElement("div");
+        card.className = "confirm-card";
+
+        const title = document.createElement("h4");
+        title.textContent = data.memberName || "Direct referral";
+
+        const meta = document.createElement("div");
+        meta.className = "confirm-meta";
+        meta.innerHTML =
+          "Amount: <strong>" + money(data.amount) + "</strong><br>" +
+          "Submitted: <strong>" + dateText(data.submittedAt) + "</strong>" +
+          (data.proofNote
+            ? "<br>Note: <strong>" + escapeHtml(data.proofNote) + "</strong>"
+            : "");
+
+        const actions = document.createElement("div");
+        actions.className = "confirm-actions";
+
+        const confirmBtn = document.createElement("button");
+        confirmBtn.className = "btn btn-confirm";
+        confirmBtn.textContent = "Confirm received";
+        confirmBtn.addEventListener("click", () =>
+          handleDecision(item.id, data, uid, "confirmed", confirmBtn, rejectBtn)
+        );
+
+        const rejectBtn = document.createElement("button");
+        rejectBtn.className = "btn btn-reject";
+        rejectBtn.textContent = "Reject";
+        rejectBtn.addEventListener("click", () =>
+          handleDecision(item.id, data, uid, "rejected", confirmBtn, rejectBtn)
+        );
+
+        actions.append(confirmBtn, rejectBtn);
+        card.append(title, meta, actions);
+        container.appendChild(card);
+      });
+    } catch (err) {
+      console.error(err);
+      container.innerHTML =
+        '<div class="empty">Could not load pending confirmations.</div>';
+    }
+  }
+
+  async function handleDecision(submissionId, data, uplineUid, decision, confirmBtn, rejectBtn) {
+    const label = decision === "confirmed" ? "confirm" : "reject";
+    if (!window.confirm(`Are you sure you want to ${label} this payment?`)) return;
+
+    confirmBtn.disabled = true;
+    rejectBtn.disabled = true;
+    clearError();
+
+    try {
+      const submissionRef = doc(db, "paymentSubmissions", submissionId);
+      const memberRef = doc(db, "users", data.uid);
+
+      const batch = writeBatch(db);
+
+      batch.update(submissionRef, {
+        status: decision,
+        decidedBy: uplineUid,
+        decidedAt: serverTimestamp()
+      });
+
+      if (decision === "confirmed") {
+        batch.update(memberRef, {
+          status: "Active",
+          confirmedBy: uplineUid,
+          confirmedAt: serverTimestamp()
+        });
+      } else {
+        batch.update(memberRef, {
+          status: "Rejected",
+          confirmedBy: uplineUid,
+          confirmedAt: serverTimestamp()
+        });
+      }
+
+      await batch.commit();
+
+      await loadPendingConfirmations(uplineUid);
+    } catch (err) {
+      console.error(err);
+      error("Could not save your decision. Check Firestore permissions.");
+      confirmBtn.disabled = false;
+      rejectBtn.disabled = false;
+    }
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  async function loadReferralGroup(uid) {
+    const rows = $("referralRows");
+    rows.replaceChildren();
+
+    const referralsQuery = query(
+      collection(db, "users"),
+      where("inviterUid", "==", uid)
+    );
+
+    const snapshot = await getDocs(referralsQuery);
+
+    $("directReferrals").textContent = snapshot.size;
+
+    if (snapshot.empty) {
+      rows.innerHTML = '<tr><td colspan="4">No direct referrals found.</td></tr>';
+      return;
+    }
+
+    snapshot.docs.forEach(item => {
+      const data = item.data();
+      const row = document.createElement("tr");
+
+      const name = document.createElement("td");
+      name.textContent = data.fullName || "Member";
+
+      const username = document.createElement("td");
+      username.textContent = data.username || "—";
+
+      const joined = document.createElement("td");
+      joined.textContent = dateText(data.createdAt);
+
+      const status = document.createElement("td");
+      status.textContent = data.status || "Active";
+
+      row.append(name, username, joined, status);
+      rows.appendChild(row);
+    });
+  }
+
+  async function loadReferralGroupSize(uid) {
+    const snapshot = await getDocs(collection(db, "users"));
+    const allUsers = snapshot.docs.map(item => ({
+      uid: item.id,
+      inviterUid: item.data().inviterUid
+    }));
+
+    const children = new Map();
+
+    allUsers.forEach(member => {
+      if (!member.inviterUid) return;
+      if (!children.has(member.inviterUid)) {
+        children.set(member.inviterUid, []);
+      }
+      children.get(member.inviterUid).push(member.uid);
+    });
+
+    const visited = new Set([uid]);
+    const queue = [...(children.get(uid) || [])];
+
+    while (queue.length) {
+      const member = queue.shift();
+      if (visited.has(member)) continue;
+
+      visited.add(member);
+      queue.push(...(children.get(member) || []));
+    }
+
+    $("groupMembers").textContent = visited.size - 1;
+  }
+
+  async function loadHistory(uid) {
+    const container = $("historyContainer");
+
+    const historyQuery = query(
+      collection(db, "circleHistory"),
+      where("uid", "==", uid)
+    );
+
+    const snapshot = await getDocs(historyQuery);
+
+    $("milestoneCount").textContent = snapshot.size;
+
+    if (snapshot.empty) {
+      container.textContent = "No membership history records found.";
+      return;
+    }
+
+    container.replaceChildren();
+
+    const records = snapshot.docs.map(item => item.data());
+
+    records.sort((a, b) =>
+      (b.createdAt?.toMillis?.() || 0) -
+      (a.createdAt?.toMillis?.() || 0)
+    );
+
+    records.forEach(record => {
+      const row = document.createElement("div");
+      row.className = "info-row";
+
+      const stage = document.createElement("span");
+      stage.textContent = record.stage || "Membership milestone";
+
+      const date = document.createElement("strong");
+      date.textContent = dateText(record.createdAt);
+
+      row.append(stage, date);
+      container.appendChild(row);
+    });
+  }
+
+  async function loadTransactions(uid) {
+    const rows = $("transactionRows");
+    rows.replaceChildren();
+
+    const transactionQuery = query(
+      collection(db, "transactions"),
+      where("uid", "==", uid)
+    );
+
+    const snapshot = await getDocs(transactionQuery);
+
+    if (snapshot.empty) {
+      rows.innerHTML = '<tr><td colspan="4">No transaction records found.</td></tr>';
+      return;
+    }
+
+    const records = snapshot.docs.map(item => item.data());
+
+    records.sort((a, b) =>
+      (b.createdAt?.toMillis?.() || 0) -
+      (a.createdAt?.toMillis?.() || 0)
+    );
+
+    records.forEach(record => {
+      const row = document.createElement("tr");
+
+      const description = document.createElement("td");
+      description.textContent = record.description || "Transaction";
+
+      const amount = document.createElement("td");
+      amount.textContent = money(record.amount);
+
+      const date = document.createElement("td");
+      date.textContent = dateText(record.createdAt);
+
+      const statusCell = document.createElement("td");
+      const badge = document.createElement("span");
+
+      const status = String(record.status || "pending").toLowerCase();
+
+      badge.className = "status " + status;
+      badge.textContent = status.toUpperCase();
+
+      statusCell.appendChild(badge);
+      row.append(description, amount, date, statusCell);
+      rows.appendChild(row);
+    });
+  }
+
+  async function loadPage(user) {
+    const profile = await getDoc(doc(db, "users", user.uid));
+
+    if (!profile.exists()) {
+      error("Your member profile could not be found.");
+      return;
+    }
+
+    const data = profile.data();
+    const stage = data.currentStage || "Starter";
+
+    safeText($("currentStage"), stage);
+    safeText($("accountStatus"), data.status || "Active");
+    safeText($("fullName"), data.fullName);
+    safeText($("username"), data.username);
+    safeText($("email"), data.email || user.email);
+    safeText($("phone"), data.phone);
+    safeText($("createdAt"), dateText(data.createdAt));
+    safeText($("memberId"), user.uid);
+
+    $("avatar").textContent =
+      (data.fullName || data.username || "U").charAt(0).toUpperCase();
+
+    const index = circles.findIndex(
+      item => item[0].toLowerCase() === String(stage).toLowerCase()
+    );
+
+    $("stageNumber").textContent =
+      index >= 0 ? String(index + 1).padStart(2, "0") + " / 15" : "Not recorded";
+
+    renderCircles(stage);
+
+    const results = await Promise.allSettled([
+      loadPendingConfirmations(user.uid),
+      loadReferralGroup(user.uid),
+      loadReferralGroupSize(user.uid),
+      loadHistory(user.uid),
+      loadTransactions(user.uid)
+    ]);
+
+    const failed = results.filter(result => result.status === "rejected");
+
+    if (failed.length) {
+      console.error("Some sections could not load:", failed);
+      error("Some records could not be loaded. Check Firestore permissions and collection structure.");
+    }
+  }
+
+  $("logoutBtn").addEventListener("click", async () => {
+    if (!confirm("Are you sure you want to logout?")) return;
+
+    try {
+      await signOut(auth);
+      window.location.href = "login.html";
+    } catch (err) {
+      error("Logout failed. Please try again.");
+    }
+  });
+
+  onAuthStateChanged(auth, async user => {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    try {
+      await loadPage(user);
+    } catch (err) {
+      console.error(err);
+      error("Unable to load your membership information. Please check your connection and Firebase permissions.");
+    }
+  });
+</script>
+
+</body>
+</html>
