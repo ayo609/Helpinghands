@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087A43">
+  <title>Login | Helpinghands</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #087A43;
+      --green-dark: #075E35;
+      --gold: #D9A441;
+      --light: #F3F7F4;
+      --white: #FFFFFF;
+      --dark: #26352C;
+      --muted: #718078;
+      --border: #E2EAE4;
+      --shadow: 0 12px 35px rgba(10, 65, 35, .09);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(460px, 100%);
+      margin: auto;
+    }
+
+    /* HEADER / SITE NAME */
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: white;
+      font-size: 24px;
+    }
+
+    /* LOGIN CARD */
+
+    .login-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .login-card h3 {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .form-subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .form-group input {
+      width: 100%;
+      height: 48px;
+      border: 1px solid var(--border);
+      background: #FCFDFC;
+      border-radius: 9px;
+      padding: 0 13px;
+      outline: none;
+      color: var(--dark);
+      transition: .2s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(8,122,67,.09);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 60px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .login-btn {
+      width: 100%;
+      min-height: 49px;
+      font-size: 15px;
+      margin-top: 7px;
+    }
+
+    .login-btn:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .signup-link a {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    /* MODAL */
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13,30,20,.55);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      width: min(400px, 100%);
+      padding: 30px;
+      border-radius: 17px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      animation: modalIn .25s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 15px;
+      background: #E8F4EC;
+      color: var(--green);
+      font-size: 27px;
+    }
+
+    .modal-box h3 {
+      margin-bottom: 8px;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width: 650px) {
+      .login-card {
+        padding: 23px 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- SITE NAME -->
+    <div class="header">
+      <a href="#" class="logo">
+        <span class="logo-mark">H</span>
+        Helpinghands
+      </a>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="login-card">
+      <h3>Login to Your Account</h3>
+      <p class="form-subtitle">Enter your details to continue.</p>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+            <button
+              type="button"
+              class="toggle-password"
+              id="togglePassword"
+            >
+              Show
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary login-btn" id="loginBtn">
+          Login
+        </button>
+
+      </form>
+
+      <div class="signup-link">
+        Don't have an account?
+        <a href="index.html#register">Create Account</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <div class="modal-icon" id="modalIcon">!</div>
+      <h3 id="modalTitle">Notification</h3>
+      <p id="modalMessage">Message goes here.</p>
+      <button class="btn btn-primary" id="modalClose">Continue</button>
+    </div>
+  </div>
+
+  <!-- FIREBASE -->
+  <script type="module">
+
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+    import {
+      getAuth,
+      signInWithEmailAndPassword
+    } from
+      "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDgKw66LXAJkviJdQMRVN254O71LOocGTA",
+      authDomain: "helpinghands-91d11.firebaseapp.com",
+      projectId: "helpinghands-91d11",
+      storageBucket: "helpinghands-91d11.firebasestorage.app",
+      messagingSenderId: "402651670418",
+      appId: "1:402651670418:web:59900378df2527043c034b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
+    const passwordInput = document.getElementById("password");
+
+    // PASSWORD VISIBILITY
+    document.getElementById("togglePassword").addEventListener("click", () => {
+      const button = document.getElementById("togglePassword");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        button.textContent = "Hide";
+      } else {
+        passwordInput.type = "password";
+        button.textContent = "Show";
+      }
+    });
+
+    // MODAL
+    function showModal(title, message, icon = "!") {
+      document.getElementById("modalTitle").textContent = title;
+      document.getElementById("modalMessage").textContent = message;
+      document.getElementById("modalIcon").textContent = icon;
+      document.getElementById("modal").classList.add("show");
+    }
+
+    document.getElementById("modalClose").addEventListener("click", () => {
+      document.getElementById("modal").classList.remove("show");
+    });
+
+    // LOGIN
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = passwordInput.value;
+
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Logging in...";
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+
+        // Go to user dashboard
+        window.location.href = "home.html";
+
+      } catch (error) {
+        console.error("Login error:", error);
+
+        let message = "Unable to log in. Please try again.";
+
+        if (
+          error.code === "auth/invalid-credential" ||
+          error.code === "auth/wrong-password" ||
+          error.code === "auth/user-not-found"
+        ) {
+          message = "Incorrect email address or password.";
+        } else if (error.code === "auth/too-many-requests") {
+          message = "Too many attempts. Please try again later.";
+        } else if (error.code === "auth/network-request-failed") {
+          message = "Network error. Check your internet connection.";
+        } else if (error.code === "auth/invalid-email") {
+          message = "Please enter a valid email address.";
+        }
+
+        showModal("Login Failed", message, "!");
+
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login";
+      }
+    });
+
+  </script>
+
+</body>
+</html>
